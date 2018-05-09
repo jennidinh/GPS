@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -19,13 +21,15 @@ public class GpsView extends JFrame {
 	public GpsView() {
 		group.add(button);
 		group.add(button2);
+		button.setActionCommand("kortaste");
+		button2.setActionCommand("snabbaste");
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(400, 250);
 		JPanel gpsPanel = new JPanel();
 
 		gpsPanel.add(label);
-		
+
 		// från text och textruta
 		JPanel fromPanel = new JPanel();
 		fromPanel.setPreferredSize(new Dimension(400, 30));
@@ -39,7 +43,7 @@ public class GpsView extends JFrame {
 		toPanel.add(to);
 		toPanel.add(text2);
 		gpsPanel.add(toPanel, BorderLayout.NORTH);
-		
+
 		// välja kortaste- eller snabbaste väg
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS));
@@ -56,11 +60,39 @@ public class GpsView extends JFrame {
 
 		this.add(gpsPanel);
 	}
-	
+
+	public String getFromCity() {
+		return text.getText();
+
+	}
+
+	public String getToCity() {
+
+		return text2.getText();
+
+	}
+
+	public String getChoice() {
+
+		return group.getSelection().getActionCommand();
+	}
+
+	public void addSearchListener(ActionListener search) {
+
+		searchButton.addActionListener(search);
+
+	}
+
+	public void displayErrorMsg(String errorMsg) {
+
+		JOptionPane.showMessageDialog(this, errorMsg);
+	}
 
 	public static void main(String[] args) {
 		GpsView gps = new GpsView();
 
+		Graph g = new Graph();
+		GpsController c = new GpsController(gps, g);
 		gps.setVisible(true);
 
 	}

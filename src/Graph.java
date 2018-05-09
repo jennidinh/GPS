@@ -1,11 +1,11 @@
 
 public class Graph {
 
-	private Hashtable cities;
+	//private Hashtable cities;
 
 	public Graph() {
 
-		cities = new Hashtable();
+	//	cities = new Hashtable();
 
 	}
 
