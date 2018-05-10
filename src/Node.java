@@ -16,6 +16,11 @@ public class Node {
 		
 	}
 	
+	public String getCity() {
+		
+		return city;
+	}
+	
 	
 	
 	
