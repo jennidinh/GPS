@@ -1,10 +1,10 @@
 import java.util.LinkedList;
 
-public class HashTabell {
+public class Hashtabell {
 
 	LinkedList<Node>[] arr;
 
-	public HashTabell(int size) {
+	public Hashtabell(int size) {
 		arr = new LinkedList[size];
 
 	}

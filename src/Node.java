@@ -21,6 +21,10 @@ public class Node {
 		return city;
 	}
 	
+	public LinkedList<Edge> getPaths(){
+		return paths;
+	}
+	
 	
 	
 	
