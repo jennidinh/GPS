@@ -16,6 +16,15 @@ public class Node {
 		
 	}
 	
+	public String getCity() {
+		
+		return city;
+	}
+	
+	public LinkedList<Edge> getPaths(){
+		return paths;
+	}
+	
 	
 	
 	
