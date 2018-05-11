@@ -12,31 +12,72 @@ public class GpsController {
 		this.theModel = theModel;
 
 		this.theView.addSearchListener(new SearchListener());
+		this.theView.addGoBackListener(new GoBackListener());
+		this.theView.addMoreInfoListener(new MoreInfoListener());
+		this.theView.addNoInfoListener(new NoInfoListener());
+	}
+	
+	
+	class NoInfoListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			theView.showNoInfo();			
+		}
+		
+		
+	}
+	
+	class MoreInfoListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			theView.showInfo();			
+		}
+		
+		
+	}
+	
+	class GoBackListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			theView.showPrev();
+			
+		}
+		
 	}
 
 	class SearchListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String fromCity = "";
-			String toCity = "";
+			
+			String fromCity;
+			String toCity;
 			String choice;
 			try {
 				fromCity = theView.getFromCity();
 				toCity = theView.getToCity();
 				choice = theView.getChoice();
+				if(fromCity.equals("") || toCity.equals("")){
+					theView.displayErrorMsg("Skriv in två städer");
+				}
 
-				if (choice.equals("kortaste")) {
+				else if (choice.equals("Kortaste")) {
 					theModel.findShortestPath();
-				} else if (choice.equals("snabbaste")) {
+					theView.showResult("Kortaste vägen");
+					
+				} else if (choice.equals("Snabbaste")) {
 					theModel.findFastestPath();
+					theView.showResult("Snabbaste vägen");
 
-				} else {
-					theView.displayErrorMsg("Välj korstaste- eller snabbaste vägen");
 				}
 
 			} catch (Exception e2) {
-				theView.displayErrorMsg("Skriv två städer");
+				System.out.println(e2);
+				theView.displayErrorMsg("Välj korstaste- eller snabbaste vägen");
 			}
 
 		}
