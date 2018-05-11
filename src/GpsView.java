@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class GpsView extends JFrame {
-
+//
 	JPanel gpsPanel;
 	JButton searchButton = new JButton("SÖK");
 	JLabel label = new JLabel("HH-Trafiken");
