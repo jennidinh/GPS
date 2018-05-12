@@ -10,9 +10,10 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
 
 public class GpsView extends JFrame {
-//
+	//
 	JPanel gpsPanel;
 	JButton searchButton = new JButton("SÖK");
 	JLabel label = new JLabel("HH-Trafiken");
@@ -35,12 +36,14 @@ public class GpsView extends JFrame {
 	JLabel km = new JLabel("km");
 	JLabel way = new JLabel("Resa:", SwingConstants.LEFT);
 	JLabel startCity;
-	JLabel arrow = new JLabel("―>");
+	JLabel arrow = new JLabel("→");
 	JLabel desCity;
+	JButton moreInfoButton = new JButton("Mer info");
 
 	JPanel infoPanel;
-	JButton moreInfoButton = new JButton("Mer info");
 	JButton noInfoButton = new JButton("Tillbaka");
+	JList<String> list;
+	DefaultListModel<String> listModel;
 
 	public GpsView() {
 		group.add(button);
@@ -138,7 +141,7 @@ public class GpsView extends JFrame {
 	 * @param res
 	 *            ta in resultat och skriver den i res panel
 	 */
-	public void showResult(String res) {
+	public void showResult(String res, Path path) {
 		gpsPanel.setVisible(false);
 		resultPanel = new JPanel();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -176,13 +179,13 @@ public class GpsView extends JFrame {
 		distancePanel.setPreferredSize(new Dimension(400, 30));
 		distancePanel.add(distance);
 		distanceOutput.setEditable(false);
-		distanceOutput.setText("");
+		distanceOutput.setText("" + path.getDist());
 		distancePanel.add(distanceOutput);
 		distancePanel.add(km);
 		resultPanel.add(distancePanel, BorderLayout.NORTH);
 
 		JPanel wayPanel = new JPanel();
-		wayPanel.setPreferredSize(new Dimension(500, 50));	
+		wayPanel.setPreferredSize(new Dimension(500, 50));
 		wayPanel.add(way);
 		startCity = new JLabel(text.getText());
 		wayPanel.add(startCity);
@@ -197,28 +200,47 @@ public class GpsView extends JFrame {
 		buttonPanel.add(moreInfoButton);
 		resultPanel.add(buttonPanel, BorderLayout.NORTH);
 
+		createInfo(path);
+
 		this.add(resultPanel);
 
-		
 	}
 
-	public void createInfo() {
+	public void createInfo(Path p) {
 		infoPanel = new JPanel();
+		JPanel inPanel = new JPanel();
+
+		listModel = new DefaultListModel<String>();
+		listModel.addElement(p.getPath());
+		/*listModel.addElement("Helsingborg");
+		listModel.addElement("Göteborg");
+		listModel.addElement("Perstorp");
+		listModel.addElement("Stockholm");
+		listModel.addElement("Malmö");
+		listModel.addElement("Jönköping");*/
+
+		// Create the list and put it in a scroll pane.
+		list = new JList<String>(listModel);
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		// list.setSelectedIndex(0);
+		list.setVisibleRowCount(5);
+		JScrollPane listScrollPane = new JScrollPane(list);
+		inPanel.add(listScrollPane);
+		infoPanel.add(inPanel);
 		infoPanel.add(noInfoButton);
-		
+
 		this.add(infoPanel);
 
-
 	}
-	
+
 	public void showNoInfo() {
 		infoPanel.setVisible(false);
 		resultPanel.setVisible(true);
-		
+
 	}
 
 	public void showInfo() {
-		createInfo();
+		// createInfo();
 		resultPanel.setVisible(false);
 
 	}
@@ -237,6 +259,7 @@ public class GpsView extends JFrame {
 	public static void main(String[] args) {
 		GpsView gps = new GpsView();
 		Graph g = new Graph();
+		g.generateGraph("Svealand");
 		GpsController c = new GpsController(gps, g);
 		gps.setVisible(true);
 

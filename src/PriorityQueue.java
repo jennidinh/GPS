@@ -8,7 +8,7 @@ public class PriorityQueue<AnyType> {
 	AnyType[] arr;
 
 	public PriorityQueue() {
-
+		cmp = null;
 		currentSize = 0;
 
 		arr = (AnyType[]) new Object[10];
@@ -20,6 +20,7 @@ public class PriorityQueue<AnyType> {
 
 		// Percolate up
 		int hole = ++currentSize;
+
 		arr[0] = x;
 
 		for (; compare(x, arr[hole / 2]) < 0; hole /= 2)
@@ -55,10 +56,12 @@ public class PriorityQueue<AnyType> {
 	}
 
 	private int compare(AnyType lhs, AnyType rhs) {
-		if (cmp == null)
+		/*if (cmp == null)
 			return ((Comparable) lhs).compareTo(rhs);
 		else
 			return cmp.compare(lhs, rhs);
+			*/
+		return ((Comparable) lhs).compareTo(rhs);
 	}
 	
 	public AnyType findMin( )

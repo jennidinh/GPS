@@ -16,44 +16,37 @@ public class GpsController {
 		this.theView.addMoreInfoListener(new MoreInfoListener());
 		this.theView.addNoInfoListener(new NoInfoListener());
 	}
-	
-	
-	class NoInfoListener implements ActionListener{
+
+	class NoInfoListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			theView.showNoInfo();			
+			theView.showNoInfo();
 		}
-		
-		
 	}
-	
-	class MoreInfoListener implements ActionListener{
+
+	class MoreInfoListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			theView.showInfo();			
+			theView.showInfo();
 		}
-		
-		
 	}
-	
-	class GoBackListener implements ActionListener{
+
+	class GoBackListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+
 			theView.showPrev();
-			
 		}
-		
 	}
 
 	class SearchListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+
 			String fromCity;
 			String toCity;
 			String choice;
@@ -61,27 +54,27 @@ public class GpsController {
 				fromCity = theView.getFromCity();
 				toCity = theView.getToCity();
 				choice = theView.getChoice();
-				if(fromCity.equals("") || toCity.equals("")){
+				if (fromCity.equals("") || toCity.equals("")) {
 					theView.displayErrorMsg("Skriv in två städer");
 				}
 
 				else if (choice.equals("Kortaste")) {
-					theModel.findShortestPath();
-					theView.showResult("Kortaste vägen");
-					
-				} else if (choice.equals("Snabbaste")) {
-					theModel.findFastestPath();
-					theView.showResult("Snabbaste vägen");
+					System.out.println("kortaste");
+					Path path = theModel.findShortestPath(fromCity, toCity);
+					System.out.println("efter");
+					theView.showResult("Kortaste vägen", path);
+				}
 
+				else if (choice.equals("Snabbaste")) {
+					Path path = theModel.findShortestPath(fromCity, toCity);
+					theModel.findFastestPath();
+					theView.showResult("Snabbaste vägen", path);
 				}
 
 			} catch (Exception e2) {
 				System.out.println(e2);
 				theView.displayErrorMsg("Välj korstaste- eller snabbaste vägen");
 			}
-
 		}
-
 	}
-
 }
