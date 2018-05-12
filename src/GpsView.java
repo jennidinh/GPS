@@ -58,7 +58,7 @@ public class GpsView extends JFrame {
 
 		try {
 			BufferedImage myPicture;
-			myPicture = ImageIO.read(new File("/Users/jenniferdinh/eclipse-workspace/Graph miniproject/src/van.gif"));
+			myPicture = ImageIO.read(new File("src/van.gif"));
 			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
 			picLabel.setPreferredSize(new Dimension(350, 300));
 			gpsPanel.add(picLabel);
@@ -157,7 +157,7 @@ public class GpsView extends JFrame {
 
 		try {
 			BufferedImage myPicture;
-			myPicture = ImageIO.read(new File("/Users/jenniferdinh/eclipse-workspace/Graph miniproject/src/van.gif"));
+			myPicture = ImageIO.read(new File("src/van.gif"));
 			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
 			picLabel.setPreferredSize(new Dimension(350, 300));
 			resultPanel.add(picLabel);

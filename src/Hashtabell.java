@@ -27,15 +27,11 @@ public class Hashtabell {
 
 		int hash = name.hashCode() % arr.length;
 		hash = Math.abs(hash);
-		System.out.println(hash);
-		System.out.println(size);
 		for(int i = 0; i < arr[hash].size(); i++) {
 			if(arr[hash].get(i).getCity().equals(name)) {
-				System.out.println("hittade " + name);
 				return arr[hash].get(i);
 			}
 		}
-		System.out.println("return null");
 		return null;
 
 	}

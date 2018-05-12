@@ -42,9 +42,6 @@ public class Node implements Comparable<Node>{
 	}
 	
 	public void setCost(int i) {
-		if(city.equals("Götberg")) {
-			System.out.println("ändrar i götberg");
-		}
 		cost = i;
 	}
 	

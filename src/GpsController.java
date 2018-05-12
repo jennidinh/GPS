@@ -59,9 +59,7 @@ public class GpsController {
 				}
 
 				else if (choice.equals("Kortaste")) {
-					System.out.println("kortaste");
 					Path path = theModel.findShortestPath(fromCity, toCity);
-					System.out.println("efter");
 					theView.showResult("Kortaste vägen", path);
 				}
 
