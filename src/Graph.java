@@ -26,14 +26,17 @@ public class Graph {
 			String from;
 			String dest;
 			int weight;
+			double vel;
+			double time;
 
 			while (scan.hasNext()) {
 
 				from = scan.next();
 				dest = scan.next();
-
 				weight = Integer.parseInt(scan.next());
-				addEdge(from, dest, weight);
+				vel = Double.parseDouble(scan.next());
+				time = weight/vel;
+				addEdge(from, dest, weight, time);
 
 			}
 
@@ -42,18 +45,18 @@ public class Graph {
 		}
 	}
 
-	public void add(String startCity, String destinationCity, int weight) {
+	public void add(String startCity, String destinationCity, int weight, double time) {
 		Node s = getNode(startCity);
 		Node d = getNode(destinationCity);
-		Edge e = new Edge(d, weight);
-		addEdge(startCity, destinationCity, weight);
+		Edge e = new Edge(d, weight, time);
+		addEdge(startCity, destinationCity, weight, time);
 
 	}
 
-	public void addEdge(String startCity, String destCity, int weight) {
+	public void addEdge(String startCity, String destCity, int weight, double time) {
 		Node start = getNode(startCity);
 		Node dest = getNode(destCity);
-		start.getPaths().add(new Edge(dest, weight));
+		start.getPaths().add(new Edge(dest, weight, time));
 
 	}
 
@@ -72,8 +75,9 @@ public class Graph {
 		Node destination = getNode(dest);
 		int dist = destination.getCost();
 		String path = getPath(destination);
+		double time = destination.getTime();
 		//System.out.println(destination.getCity() + " är: " + destination.getCost());
-		Path p = new Path(path, dist);
+		Path p = new Path(path, dist, time);
 		System.out.println("path: " + p.getPath());
 		return p;
 
@@ -93,9 +97,9 @@ public class Graph {
 	public String getPath(Node dest) {
 		Node prev = dest.getPrev();
 		if (prev == null) {
-			return dest.getCity() + " " + dest.getCost();
+			return dest.getCity() + " ";
 		}
-		return getPath(prev) + " " + dest.getCity() + " " + dest.getCost();
+		return getPath(prev) + " " + dest.getCity() + " ";
 
 	}
 

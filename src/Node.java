@@ -5,6 +5,7 @@ public class Node implements Comparable<Node>{
 	private String city;
 	private LinkedList<Edge> paths;
 	private int cost;
+	private double time;
 	private Node prevNode;
 	private boolean visited;
 	
@@ -19,6 +20,7 @@ public class Node implements Comparable<Node>{
 	
 	public void reset() {
 		cost = Integer.MAX_VALUE;
+		time = Double.MAX_VALUE;
 		prevNode = null;
 		visited = false;
 	}
@@ -65,7 +67,9 @@ public class Node implements Comparable<Node>{
 		return prevNode;
 	}
 
-
+	public double getTime() {
+		return time;
+	}
 	
 
 }

@@ -5,6 +5,7 @@ public class GpsController {
 
 	private GpsView theView;
 	private Graph theModel;
+	private Path path;
 
 	public GpsController(GpsView theView, Graph theModel) {
 
@@ -29,7 +30,7 @@ public class GpsController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			theView.showInfo();
+			theView.showInfo(path);
 		}
 	}
 
@@ -59,12 +60,12 @@ public class GpsController {
 				}
 
 				else if (choice.equals("Kortaste")) {
-					Path path = theModel.findShortestPath(fromCity, toCity);
+					path = theModel.findShortestPath(fromCity, toCity);
 					theView.showResult("Kortaste vägen", path);
 				}
 
 				else if (choice.equals("Snabbaste")) {
-					Path path = theModel.findShortestPath(fromCity, toCity);
+					path = theModel.findShortestPath(fromCity, toCity);
 					theModel.findFastestPath();
 					theView.showResult("Snabbaste vägen", path);
 				}

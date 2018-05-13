@@ -146,7 +146,7 @@ public class GpsView extends JFrame {
 		resultPanel = new JPanel();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(400, 550);
-		JLabel titel = new JLabel("HH-trafiken");
+		JLabel titel = new JLabel("HH-Trafiken");
 		resultPanel.add(titel);
 
 		JPanel ChosenWayPanel = new JPanel();
@@ -200,30 +200,40 @@ public class GpsView extends JFrame {
 		buttonPanel.add(moreInfoButton);
 		resultPanel.add(buttonPanel, BorderLayout.NORTH);
 
-		createInfo(path);
+		//reateInfo();
 
 		this.add(resultPanel);
 
 	}
 
-	public void createInfo(Path p) {
+	public void createInfo(Path path) {
 		infoPanel = new JPanel();
 		JPanel inPanel = new JPanel();
-
+		JLabel titel = new JLabel("HH-Trafiken");
+		infoPanel.add(titel);
+		
+		try {
+			BufferedImage myPicture;
+			myPicture = ImageIO.read(new File("src/van.gif"));
+			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+			picLabel.setPreferredSize(new Dimension(350, 300));
+			infoPanel.add(picLabel);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		listModel = new DefaultListModel<String>();
-		listModel.addElement(p.getPath());
-		/*listModel.addElement("Helsingborg");
-		listModel.addElement("Göteborg");
-		listModel.addElement("Perstorp");
-		listModel.addElement("Stockholm");
-		listModel.addElement("Malmö");
-		listModel.addElement("Jönköping");*/
-
+		String[] arr = path.getPath().split(" ");
+		for(String s : arr) {
+			listModel.addElement(s);
+		}
 		// Create the list and put it in a scroll pane.
 		list = new JList<String>(listModel);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		// list.setSelectedIndex(0);
-		list.setVisibleRowCount(5);
+		//list.setVisibleRowCount(10);
+		list.setPreferredSize(new Dimension(300, 400));
 		JScrollPane listScrollPane = new JScrollPane(list);
 		inPanel.add(listScrollPane);
 		infoPanel.add(inPanel);
@@ -239,8 +249,8 @@ public class GpsView extends JFrame {
 
 	}
 
-	public void showInfo() {
-		// createInfo();
+	public void showInfo(Path path) {
+		createInfo(path);
 		resultPanel.setVisible(false);
 
 	}
