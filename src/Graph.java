@@ -115,6 +115,7 @@ public class Graph {
 			LinkedList<Edge> adj = currentNode.getPaths();
 
 			if (!currentNode.isVisited()) {
+				//System.out.println(currentNode.getCity());
 				currentNode.setVisited(true);
 				for (int i = 0; i < adj.size(); i++) {
 					Edge currentPath = adj.get(i);
@@ -126,8 +127,10 @@ public class Graph {
 						next.setPrev(currentNode);
 						pq.add(next);
 					}
+					//System.out.print(next.getCity() + " " + next.getCost() + " ");
 
 				}
+			
 			}
 		}
 	}

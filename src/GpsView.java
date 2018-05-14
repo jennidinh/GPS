@@ -269,7 +269,7 @@ public class GpsView extends JFrame {
 	public static void main(String[] args) {
 		GpsView gps = new GpsView();
 		Graph g = new Graph();
-		g.generateGraph("Svealand");
+		g.generateGraph("Svealand2");
 		GpsController c = new GpsController(gps, g);
 		gps.setVisible(true);
 
