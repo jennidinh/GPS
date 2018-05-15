@@ -6,7 +6,8 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Graph {
-
+	private static final int DISTANCE = 0;
+	private static final int TIME = 1;
 	private Hashtabell cities;
 
 	public Graph() {
@@ -71,7 +72,7 @@ public class Graph {
 
 	public Path findShortestPath(String start, String dest) {
 		resetAll();
-		dijkstra(start, 0);
+		dijkstra(start, DISTANCE);
 		Node destination = getNode(dest);
 		int dist = destination.getCost();
 		String path = getPath(destination);
@@ -105,11 +106,14 @@ public class Graph {
 
 	private void dijkstra(String start, int var) {
 		PriorityQueue<Node> pq;
-		if (var == 0) {
+		if (var == DISTANCE) {
 			pq = new PriorityQueue<Node>(new DistComparator());
-		} else {
+		} else if(var == TIME){
 			System.out.println("snabbaste komp");
 			pq = new PriorityQueue<Node>(new TimeComparator());
+		}
+		else {
+			return;
 		}
 		Node startNode = getNode(start);
 		startNode.setCost(0);
@@ -130,14 +134,14 @@ public class Graph {
 					int cost = currentNode.getCost() + currentPath.getWeight();
 					double costTime = currentNode.getTime() + currentPath.getTime();
 
-					if (var == 0) {
+					if (var == DISTANCE) {
 						if (cost < next.getCost()) {
 							next.setCost(cost);
 							next.setTime(costTime);
 							next.setPrev(currentNode);
 							pq.add(next);
 						}
-					}else {
+					}else { //var == time
 						if (costTime < next.getTime()) {
 							next.setTime(costTime);
 							next.setCost(cost);
@@ -155,7 +159,7 @@ public class Graph {
 
 	public Path findFastestPath(String start, String dest) {
 		resetAll();
-		dijkstra(start, 1);
+		dijkstra(start, TIME);
 		System.out.println("klar med dijk i snabbaste");
 		Node destination = getNode(dest);
 		int dist = destination.getCost();
