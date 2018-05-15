@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -28,9 +29,9 @@ public class GpsView extends JFrame {
 	JPanel resultPanel;
 	JButton goBack = new JButton("Ny sökning");
 	JLabel chosenWay;
-	JLabel time = new JLabel("Tid:        ", SwingConstants.LEFT);
+	JLabel time = new JLabel("Tid:      ", SwingConstants.LEFT);
 	JTextField timeOutput = new JTextField(10);
-	JLabel min = new JLabel("min");
+	JLabel min = new JLabel("h");
 	JLabel distance = new JLabel("Avstånd:", SwingConstants.LEFT);
 	JTextField distanceOutput = new JTextField(10);
 	JLabel km = new JLabel("km");
@@ -170,7 +171,8 @@ public class GpsView extends JFrame {
 		timePanel.setPreferredSize(new Dimension(400, 30));
 		timePanel.add(time);
 		timeOutput.setEditable(false);
-		timeOutput.setText("");
+		DecimalFormat df = new DecimalFormat("#.##");
+		timeOutput.setText("" + df.format(path.getTime()));
 		timePanel.add(timeOutput);
 		timePanel.add(min);
 		resultPanel.add(timePanel, BorderLayout.NORTH);

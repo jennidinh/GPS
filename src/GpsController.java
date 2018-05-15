@@ -55,6 +55,7 @@ public class GpsController {
 				fromCity = theView.getFromCity();
 				toCity = theView.getToCity();
 				choice = theView.getChoice();
+				System.out.println(choice);
 				if (fromCity.equals("") || toCity.equals("")) {
 					theView.displayErrorMsg("Skriv in två städer");
 				}
@@ -65,9 +66,11 @@ public class GpsController {
 				}
 
 				else if (choice.equals("Snabbaste")) {
-					path = theModel.findShortestPath(fromCity, toCity);
-					theModel.findFastestPath();
+					System.out.println("kom ini snabbaste");
+					//path = theModel.findShortestPath(fromCity, toCity);
+					path = theModel.findFastestPath(fromCity, toCity);
 					theView.showResult("Snabbaste vägen", path);
+					System.out.println("klar med snabbaste");
 				}
 
 			} catch (Exception e2) {

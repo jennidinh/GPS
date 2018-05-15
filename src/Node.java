@@ -71,5 +71,9 @@ public class Node implements Comparable<Node>{
 		return time;
 	}
 	
+	public void setTime(double t) {
+		time = t;
+	}
+	
 
 }

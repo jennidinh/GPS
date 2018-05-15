@@ -4,15 +4,22 @@ import java.util.NoSuchElementException;
 public class PriorityQueue<AnyType> {
 
 	private Comparator<? super AnyType> cmp;
-	int currentSize;
-	AnyType[] arr;
+	private int currentSize;
+	private AnyType[] arr;
+	private static final int DEFAULT_CAPACITY = 100;
 
 	public PriorityQueue() {
 		cmp = null;
 		currentSize = 0;
-
-		arr = (AnyType[]) new Object[10];
+		arr = (AnyType[]) new Object[DEFAULT_CAPACITY + 1];
 	}
+	
+	public PriorityQueue( Comparator<? super AnyType> c )
+    {
+        currentSize = 0;
+        cmp = c;
+        arr = (AnyType[]) new Object[ DEFAULT_CAPACITY + 1 ];
+    }
 
 	public boolean add(AnyType x) {
 		if (currentSize + 1 == arr.length)
@@ -56,12 +63,12 @@ public class PriorityQueue<AnyType> {
 	}
 
 	private int compare(AnyType lhs, AnyType rhs) {
-		/*if (cmp == null)
+		if (cmp == null)
 			return ((Comparable) lhs).compareTo(rhs);
 		else
 			return cmp.compare(lhs, rhs);
-			*/
-		return ((Comparable) lhs).compareTo(rhs);
+			
+		//return ((Comparable) lhs).compareTo(rhs);
 	}
 	
 	public AnyType findMin( )

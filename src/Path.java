@@ -19,4 +19,8 @@ public class Path {
 	public String getPath() {
 		return path;
 	}
+	
+	public double getTime() {
+		return time;
+	}
 }
