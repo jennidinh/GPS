@@ -3,6 +3,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Graph {
@@ -77,9 +78,7 @@ public class Graph {
 		int dist = destination.getCost();
 		String path = getPath(destination);
 		double time = destination.getTime();
-		// System.out.println(destination.getCity() + " är: " + destination.getCost());
 		Path p = new Path(path, dist, time);
-		System.out.println("path: " + p.getPath());
 		return p;
 
 	}
@@ -108,11 +107,10 @@ public class Graph {
 		PriorityQueue<Node> pq;
 		if (var == DISTANCE) {
 			pq = new PriorityQueue<Node>(new DistComparator());
-		} else if(var == TIME){
-			System.out.println("snabbaste komp");
+		} else if (var == TIME) {
+
 			pq = new PriorityQueue<Node>(new TimeComparator());
-		}
-		else {
+		} else {
 			return;
 		}
 		Node startNode = getNode(start);
@@ -126,7 +124,7 @@ public class Graph {
 			LinkedList<Edge> adj = currentNode.getPaths();
 
 			if (!currentNode.isVisited()) {
-				// System.out.println(currentNode.getCity());
+
 				currentNode.setVisited(true);
 				for (int i = 0; i < adj.size(); i++) {
 					Edge currentPath = adj.get(i);
@@ -141,7 +139,7 @@ public class Graph {
 							next.setPrev(currentNode);
 							pq.add(next);
 						}
-					}else { //var == time
+					} else { // var == time
 						if (costTime < next.getTime()) {
 							next.setTime(costTime);
 							next.setCost(cost);
@@ -149,7 +147,6 @@ public class Graph {
 							pq.add(next);
 						}
 					}
-					// System.out.print(next.getCity() + " " + next.getCost() + " ");
 
 				}
 
@@ -160,14 +157,11 @@ public class Graph {
 	public Path findFastestPath(String start, String dest) {
 		resetAll();
 		dijkstra(start, TIME);
-		System.out.println("klar med dijk i snabbaste");
 		Node destination = getNode(dest);
 		int dist = destination.getCost();
 		String path = getPath(destination);
 		double time = destination.getTime();
-		// System.out.println(destination.getCity() + " är: " + destination.getCost());
 		Path p = new Path(path, dist, time);
-		System.out.println("path: " + p.getPath());
 		return p;
 	}
 

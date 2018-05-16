@@ -268,13 +268,4 @@ public class GpsView extends JFrame {
 		JOptionPane.showMessageDialog(this, errorMsg);
 	}
 
-	public static void main(String[] args) {
-		GpsView gps = new GpsView();
-		Graph g = new Graph();
-		g.generateGraph("Svealand2");
-		GpsController c = new GpsController(gps, g);
-		gps.setVisible(true);
-
-	}
-
 }

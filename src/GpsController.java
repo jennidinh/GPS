@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.NoSuchElementException;
 
 public class GpsController {
 
@@ -55,22 +56,32 @@ public class GpsController {
 				fromCity = theView.getFromCity();
 				toCity = theView.getToCity();
 				choice = theView.getChoice();
-				System.out.println(choice);
 				if (fromCity.equals("") || toCity.equals("")) {
 					theView.displayErrorMsg("Skriv in två städer");
 				}
 
 				else if (choice.equals("Kortaste")) {
-					path = theModel.findShortestPath(fromCity, toCity);
-					theView.showResult("Kortaste vägen", path);
+
+					try {
+						path = theModel.findShortestPath(fromCity, toCity);
+						theView.showResult("Kortaste vägen", path);
+					} catch (NoSuchElementException err) {
+						theView.displayErrorMsg("Skriv in en giltig stad");
+
+					}
+
 				}
 
 				else if (choice.equals("Snabbaste")) {
-					System.out.println("kom ini snabbaste");
-					//path = theModel.findShortestPath(fromCity, toCity);
-					path = theModel.findFastestPath(fromCity, toCity);
-					theView.showResult("Snabbaste vägen", path);
-					System.out.println("klar med snabbaste");
+
+					try {
+						path = theModel.findFastestPath(fromCity, toCity);
+						theView.showResult("Snabbaste vägen", path);
+					} catch (NoSuchElementException err) {
+						theView.displayErrorMsg("Skriv in en giltig stad");
+
+					}
+
 				}
 
 			} catch (Exception e2) {
