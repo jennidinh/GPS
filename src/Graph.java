@@ -13,7 +13,7 @@ public class Graph {
 
 	public Graph() {
 
-		cities = new Hashtabell(10);
+		cities = new Hashtabell(100);
 
 	}
 
@@ -33,8 +33,8 @@ public class Graph {
 
 			while (scan.hasNext()) {
 
-				from = scan.next();
-				dest = scan.next();
+				from = scan.next().toLowerCase();
+				dest = scan.next().toLowerCase();
 				weight = Integer.parseInt(scan.next());
 				vel = Double.parseDouble(scan.next());
 				time = weight / vel;
@@ -72,6 +72,9 @@ public class Graph {
 	}
 
 	public Path findShortestPath(String start, String dest) {
+		if(cities.find(start) == null || cities.find(dest) == null) {
+			throw new NoSuchElementException();
+		}
 		resetAll();
 		dijkstra(start, DISTANCE);
 		Node destination = getNode(dest);
@@ -129,7 +132,7 @@ public class Graph {
 				for (int i = 0; i < adj.size(); i++) {
 					Edge currentPath = adj.get(i);
 					Node next = currentPath.getDestination();
-					int cost = currentNode.getCost() + currentPath.getWeight();
+					int cost = currentNode.getCost() + currentPath.getDistance();
 					double costTime = currentNode.getTime() + currentPath.getTime();
 
 					if (var == DISTANCE) {

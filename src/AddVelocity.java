@@ -7,8 +7,8 @@ public class AddVelocity {
 	
 	public static void main(String[] args) {
 		try {
-			Scanner scan = new Scanner(new File("Svealand"));
-			PrintWriter pw = new PrintWriter("Svealand2", "UTF-8");
+			Scanner scan = new Scanner(new File("Sverige"));
+			PrintWriter pw = new PrintWriter("Sverige2", "UTF-8");
 			while(scan.hasNext()) {
 				String city1 = scan.next();
 				String city2 = scan.next();
