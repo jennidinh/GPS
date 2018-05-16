@@ -53,8 +53,8 @@ public class GpsController {
 			String toCity;
 			String choice;
 			try {
-				fromCity = theView.getFromCity();
-				toCity = theView.getToCity();
+				fromCity = theView.getFromCity().trim().toLowerCase();
+				toCity = theView.getToCity().trim().toLowerCase();
 				choice = theView.getChoice();
 				if (fromCity.equals("") || toCity.equals("")) {
 					theView.displayErrorMsg("Skriv in två städer");

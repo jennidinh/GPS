@@ -189,10 +189,10 @@ public class GpsView extends JFrame {
 		JPanel wayPanel = new JPanel();
 		wayPanel.setPreferredSize(new Dimension(500, 50));
 		wayPanel.add(way);
-		startCity = new JLabel(text.getText());
+		startCity = new JLabel(text.getText().trim().substring(0,1).toUpperCase() + text.getText().trim().substring(1).toLowerCase());
 		wayPanel.add(startCity);
 		wayPanel.add(arrow);
-		desCity = new JLabel(text2.getText());
+		desCity = new JLabel(text2.getText().trim().substring(0,1).toUpperCase() + text2.getText().trim().substring(1).toLowerCase());
 		wayPanel.add(desCity);
 		resultPanel.add(wayPanel, BorderLayout.NORTH);
 
@@ -228,7 +228,11 @@ public class GpsView extends JFrame {
 		listModel = new DefaultListModel<String>();
 		String[] arr = path.getPath().split(" ");
 		for(String s : arr) {
-			listModel.addElement(s);
+			String s1 = s;
+			if(s1.length()>1) {
+				s1 = s.substring(0,1).toUpperCase() + s.substring(1).toLowerCase();
+			}
+			listModel.addElement(s1);
 		}
 		// Create the list and put it in a scroll pane.
 		list = new JList<String>(listModel);
