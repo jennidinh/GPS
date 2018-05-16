@@ -2,9 +2,13 @@ import java.util.LinkedList;
 
 public class Hashtabell {
 
-	LinkedList<Node>[] arr;
-	int size;
+	private LinkedList<Node>[] arr;
+	private int size;
 
+	/**
+	 * creats a hashtable with size size.
+	 * @param size the size of the hashtable.
+	 */
 	public Hashtabell(int size) {
 		arr = new LinkedList[size];
 		for(int i = 0; i < size; i++) {
@@ -14,6 +18,10 @@ public class Hashtabell {
 
 	}
 
+	/**
+	 * adds a node to the hashtable.
+	 * @param n the node. 
+	 */
 	public void add(Node n) {
 
 		int hash = n.getCity().hashCode() % arr.length;
@@ -23,6 +31,11 @@ public class Hashtabell {
 
 	}
 
+	/**
+	 * finds the name of the city in the hashtable.
+	 * @param name name of the city.
+	 * @return a node with the specified name. returns null if it's not found.
+	 */
 	public Node find(String name) {
 
 		int hash = name.hashCode() % arr.length;
@@ -36,10 +49,17 @@ public class Hashtabell {
 
 	}
 	
+	/**
+	 * returns the new size of the hashtable.
+	 * @return return size.
+	 */
 	public int size() {
 		return size;
 	}
 	
+	/**
+	 * @return iterator.
+	 */
 	public HashItr iterator() {
 		
 		return new HashItr(arr);
