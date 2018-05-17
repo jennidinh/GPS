@@ -23,7 +23,7 @@ class HashtabellTest {
 		ht.add(new Node("a"));	
 		
 		
-		assertEquals("checks if ht is", 1, ht.size());
+		assertEquals("checks ht's size", 1, ht.size());
 	}
 	
 	@Test

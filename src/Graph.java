@@ -11,12 +11,19 @@ public class Graph {
 	private static final int TIME = 1;
 	private Hashtabell cities;
 
+	/**
+	 * Creates an empty graph.
+	 */
 	public Graph() {
 
 		cities = new Hashtabell(100);
 
 	}
 
+	/**
+	 * Creates a graph using the file, each line in the file should use the format: Node1 Node2 distanceCost timeCost
+	 * @param filename the filename
+	 */
 	public void generateGraph(String filename) {
 
 		try {
@@ -47,6 +54,13 @@ public class Graph {
 		}
 	}
 
+	/**
+	 * Adds edge to the node startCity if it exist, otherwise it will create a new node and then add the new edge
+	 * @param startCity
+	 * @param destinationCity
+	 * @param weight
+	 * @param time
+	 */
 	public void add(String startCity, String destinationCity, int weight, double time) {
 		Node s = getNode(startCity);
 		Node d = getNode(destinationCity);
@@ -55,6 +69,13 @@ public class Graph {
 
 	}
 
+	/**
+	 * Similar to add
+	 * @param startCity
+	 * @param destCity
+	 * @param weight
+	 * @param time
+	 */
 	public void addEdge(String startCity, String destCity, int weight, double time) {
 		Node start = getNode(startCity);
 		Node dest = getNode(destCity);
@@ -62,6 +83,11 @@ public class Graph {
 
 	}
 
+	/**
+	 * Returns the node if found else creates one
+	 * @param name name of node
+	 * @return the node
+	 */
 	public Node getNode(String name) {
 		Node node = cities.find(name);
 		if (node == null) {
@@ -71,6 +97,9 @@ public class Graph {
 		return node;
 	}
 
+	/**
+	 * Find the shortest path from start node to destination node
+	 */
 	public Path findShortestPath(String start, String dest) {
 		if(cities.find(start) == null || cities.find(dest) == null) {
 			throw new NoSuchElementException();
@@ -86,6 +115,9 @@ public class Graph {
 
 	}
 
+	/**
+	 * use the reset() method on all nodes
+	 */
 	public void resetAll() {
 		HashItr itr = cities.iterator();
 		while (itr.hasNext()) {
@@ -97,6 +129,10 @@ public class Graph {
 		}
 	}
 
+	/**
+	 * @param dest
+	 * @return
+	 */
 	public String getPath(Node dest) {
 		Node prev = dest.getPrev();
 		if (prev == null) {
@@ -106,6 +142,9 @@ public class Graph {
 
 	}
 
+	/**
+	 * Dijkstra algorithm
+	 */
 	private void dijkstra(String start, int var) {
 		PriorityQueue<Node> pq;
 		if (var == DISTANCE) {
@@ -157,6 +196,9 @@ public class Graph {
 		}
 	}
 
+	/**
+	 * find the fastest path between start and destination node using time
+	 */
 	public Path findFastestPath(String start, String dest) {
 		resetAll();
 		dijkstra(start, TIME);

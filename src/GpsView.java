@@ -137,10 +137,8 @@ public class GpsView extends JFrame {
 	}
 
 	/**
-	 * change laskdlaksdlkasd
-	 * 
-	 * @param res
-	 *            ta in resultat och skriver den i res panel
+	 * show the search result on the screen
+	 *  
 	 */
 	public void showResult(String res, Path path) {
 		gpsPanel.setVisible(false);
@@ -207,7 +205,9 @@ public class GpsView extends JFrame {
 		this.add(resultPanel);
 
 	}
-
+	/*
+	 * create addition info panel
+	 */
 	public void createInfo(Path path) {
 		infoPanel = new JPanel();
 		JPanel inPanel = new JPanel();
@@ -248,12 +248,17 @@ public class GpsView extends JFrame {
 		this.add(infoPanel);
 
 	}
-
+	/*
+	 * Dont show additional info and show resultpanel
+	 */
 	public void showNoInfo() {
 		infoPanel.setVisible(false);
 		resultPanel.setVisible(true);
 
 	}
+	/*
+	 * show additional information
+	 */
 
 	public void showInfo(Path path) {
 		createInfo(path);
@@ -261,12 +266,18 @@ public class GpsView extends JFrame {
 
 	}
 
+	/*
+	 * go back to the previous panel
+	 */
 	public void showPrev() {
 		resultPanel.setVisible(false);
 		gpsPanel.setVisible(true);
 
 	}
-
+	
+	/*
+	 * show error message
+	 */
 	public void displayErrorMsg(String errorMsg) {
 
 		JOptionPane.showMessageDialog(this, errorMsg);
